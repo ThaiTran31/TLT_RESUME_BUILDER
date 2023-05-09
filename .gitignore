@@ -1,0 +1,7 @@
+.gitignore.swp
+
+.DS_Store
+
+venv/
+__pycache__/
+professional_summary/gpt2-finetuning-model/pytorch_model.bin
