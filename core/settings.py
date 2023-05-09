@@ -256,3 +256,8 @@ CORS_ALLOW_HEADERS = [
 # GOOGLE AUTHENTICATION
 GOOGLE_CLIENT_ID = None
 GOOGLE_CLIENT_SECRET = None
+
+HF_AUTH_KEY = os.getenv('HF_AUTH_KEY')
+ENABLE_GPT2 = os.getenv('ENABLE_GPT2').lower() in ['true', 't', '1']
+ENABLE_GRAMFORMER = os.getenv('ENABLE_GRAMFORMER').lower() in ['true', 't', '1']
+ENABLE_BART = os.getenv('ENABLE_BART').lower() in ['true', 't', '1']
