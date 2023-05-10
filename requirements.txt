@@ -76,8 +76,6 @@ urllib3==1.26.13
 wasabi==0.10.1
 opencv-python
 pytesseract
-tesseract
 openai
 pdf2image 
 huggingface_hub
-git+https://github.com/PrithivirajDamodaran/Gramformer.git
