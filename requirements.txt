@@ -79,3 +79,5 @@ pytesseract
 openai
 pdf2image 
 huggingface_hub
+opencv-python-headless
+git+https://github.com/PrithivirajDamodaran/Gramformer.git
