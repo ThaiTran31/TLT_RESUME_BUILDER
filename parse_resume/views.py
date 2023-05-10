@@ -17,9 +17,9 @@ import pytesseract
 import numpy as np
 from pdf2image import convert_from_path
 
-pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
-tesseract_version = pytesseract.get_tesseract_version()
-print("tesseract_version", tesseract_version.base_version)
+# pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
+# tesseract_version = pytesseract.get_tesseract_version()
+# print("tesseract_version", tesseract_version.base_version)
 
 cache_folder = "cache_parse_resume/"
 
@@ -50,7 +50,7 @@ class ParseResume(APIView):
             else:
                 raw_text = self.image_to_text(tmp_file)           
             result = parser.parse(raw_text)
-            # self.clear_cache_file(tmp_file)
+            self.clear_cache_file(tmp_file)
             return Response(data=result, status=status.HTTP_200_OK)
         
         except Exception as e:
@@ -76,6 +76,7 @@ class ParseResume(APIView):
         cv2.imwrite(''.join(split[:-1]) + "_scaled" + "." + split[-1], image)
         np_array = np.array(image, dtype=np.uint8)
         text = pytesseract.image_to_string(np_array)
+        print(text)
         return text
     
     def pdf_to_text(self, pdf_file):
