@@ -4,4 +4,6 @@
 
 venv/
 __pycache__/
+media/
+.env
 professional_summary/gpt2-finetuning-model/pytorch_model.bin

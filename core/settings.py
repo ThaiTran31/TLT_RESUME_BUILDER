@@ -23,14 +23,16 @@ load_dotenv(BASE_DIR / '.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.getenv('DEBUG', '1').lower() in ['true', 't', '1']
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-p%%uwrc#=l+e*5o&v3b9uet40fz75u=vbo(t+_uz(g5m^shje!'
-SECRET_KEY = os.getenv('SECRET_KEY')
+if DEBUG:
+    SECRET_KEY = 'django-insecure-p%%uwrc#=l+e*5o&v3b9uet40fz75u=vbo(t+_uz(g5m^shje!'
+else:
+    SECRET_KEY = os.getenv('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = os.getenv('DEBUG', '0').lower() in ['true', 't', '1']
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
 CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS').split(' ')
@@ -60,7 +62,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_elasticsearch_dsl',
     'django_crontab',
-    # 'professional_summary',
+    'professional_summary',
 ]
 
 MIDDLEWARE = [
@@ -167,21 +169,23 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-# STATIC_URL = 'static/'
-# MEDIA_URL = 'media/'
-# MEDIA_ROOT = BASE_DIR / 'media/'
-DEFAULT_FILE_STORAGE = 'core.azure_storage.AzureMediaStorage'
-STATICFILES_STORAGE = 'core.azure_storage.AzureStaticStorage'
+if DEBUG:
+    STATIC_URL = 'static/'
+    MEDIA_URL = 'media/'
+    MEDIA_ROOT = BASE_DIR / 'media/'
+else:
+    DEFAULT_FILE_STORAGE = 'core.azure_storage.AzureMediaStorage'
+    STATICFILES_STORAGE = 'core.azure_storage.AzureStaticStorage'
 
-AZURE_ACCOUNT_NAME = os.getenv('AZURE_ACCOUNT_NAME')
-AZURE_ACCOUNT_KEY = os.getenv('AZURE_ACCOUNT_KEY')
-AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
+    AZURE_ACCOUNT_NAME = os.getenv('AZURE_ACCOUNT_NAME')
+    AZURE_ACCOUNT_KEY = os.getenv('AZURE_ACCOUNT_KEY')
+    AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
 
-STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+    STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/static/'
+    STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/media/'
-MEDIA_ROOT = BASE_DIR / 'mediafiles'
+    MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/media/'
+    MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
 
 # Default primary key field type
@@ -256,3 +260,8 @@ CORS_ALLOW_HEADERS = [
 # GOOGLE AUTHENTICATION
 GOOGLE_CLIENT_ID = None
 GOOGLE_CLIENT_SECRET = None
+
+HF_AUTH_KEY = os.getenv('HF_AUTH_KEY')
+ENABLE_GPT2 = os.getenv('ENABLE_GPT2').lower() in ['true', 't', '1']
+ENABLE_GRAMFORMER = os.getenv('ENABLE_GRAMFORMER').lower() in ['true', 't', '1']
+ENABLE_BART = os.getenv('ENABLE_BART').lower() in ['true', 't', '1']
