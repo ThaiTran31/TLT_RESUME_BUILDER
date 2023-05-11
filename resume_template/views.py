@@ -21,7 +21,7 @@ class ResumeTemplateListAll(generics.ListAPIView):
 
 
 class MockResumeTemplate(APIView):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAdminUser]
 
     def post(self, request, format=None):
         serializers = ResumeTemplateSerializer(data=request.data, many=True)

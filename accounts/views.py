@@ -93,19 +93,8 @@ class GoogleAuthenticate(APIView):
         }, status=status.HTTP_200_OK)
 
 
-class LinkedinAuthenticate(APIView):
-    permission_classes = [permissions.AllowAny]
+# class LinkedinAuthenticate(APIView):
+#     permission_classes = [permissions.AllowAny]
 
-    def post(self, request, format=None):
-        return Response({}, status=status.HTTP_200_OK)
-
-
-class MockUser(APIView):
-    permission_classes = [permissions.AllowAny]
-
-    def post(self, request, format=None):
-        serializers = RegisterSerializer(data=request.data, many=True)
-        if serializers.is_valid():
-            serializers.save()
-            return Response(serializers.data, status=status.HTTP_201_CREATED)
-        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+#     def post(self, request, format=None):
+#         return Response({}, status=status.HTTP_200_OK)

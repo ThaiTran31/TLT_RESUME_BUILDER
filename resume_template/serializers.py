@@ -11,5 +11,5 @@ class ResumeTemplateSerializer(serializers.ModelSerializer):
             "title",
             "description",
             "category",
-            "get_thumbnail",
+            "thumbnail",
         ]
