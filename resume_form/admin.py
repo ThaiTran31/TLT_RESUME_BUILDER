@@ -33,7 +33,7 @@ class ProfessionalSummaryInline(admin.TabularInline):
 
 @admin.register(EmploymentHistory)
 class EmploymentHistoryAdmin(admin.ModelAdmin):
-    list_display = ["id", "complex_section"]
+    list_display = ["id", "complex_section", "position"]
 
 
 class EmploymentHistoryInline(admin.TabularInline):
@@ -43,7 +43,7 @@ class EmploymentHistoryInline(admin.TabularInline):
 
 @admin.register(Education)
 class EducationAdmin(admin.ModelAdmin):
-    list_display = ["id", "complex_section"]
+    list_display = ["id", "complex_section", "position"]
 
 
 class EducationInline(admin.TabularInline):
@@ -53,7 +53,7 @@ class EducationInline(admin.TabularInline):
 
 @admin.register(Custom)
 class CustomAdmin(admin.ModelAdmin):
-    list_display = ["id", "complex_section"]
+    list_display = ["id", "complex_section", "position"]
 
 
 class CustomInline(admin.TabularInline):
@@ -63,7 +63,7 @@ class CustomInline(admin.TabularInline):
 
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
-    list_display = ["id", "complex_section"]
+    list_display = ["id", "complex_section", "position"]
 
 
 class SkillInline(admin.TabularInline):
@@ -73,7 +73,7 @@ class SkillInline(admin.TabularInline):
 
 @admin.register(Link)
 class LinkAdmin(admin.ModelAdmin):
-    list_display = ["id", "complex_section"]
+    list_display = ["id", "complex_section", "position"]
 
 
 class LinkInline(admin.TabularInline):

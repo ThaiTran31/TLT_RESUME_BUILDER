@@ -1,5 +1,5 @@
 import copy
-from django.http import Http404, HttpResponseBadRequest
+from django.http import Http404
 
 from rest_framework import generics
 from rest_framework.views import APIView

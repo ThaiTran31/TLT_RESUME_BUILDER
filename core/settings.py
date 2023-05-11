@@ -219,8 +219,8 @@ ELASTICSEARCH_DSL = {
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=2),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
-    'ROTATE_REFRESH_TOKENS': False,
-    'BLACKLIST_AFTER_ROTATION': False,
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
     'ALGORITHM': 'HS256',
     'SIGNING_KEY': SECRET_KEY,
     'VERIFYING_KEY': None,
@@ -233,6 +233,7 @@ SIMPLE_JWT = {
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
+    'https://tlt-resume-builder.vercel.app',
 ]
 
 CORS_ALLOW_METHODS = [
@@ -241,7 +242,7 @@ CORS_ALLOW_METHODS = [
     "OPTIONS",
     "PATCH",
     "POST",
-    "PUT",
+    "PUT"
 ]
 
 CORS_ALLOW_HEADERS = [

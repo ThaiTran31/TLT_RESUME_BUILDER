@@ -18,6 +18,10 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+admin.site.site_header = "TLT Resume Builder Administration"
+admin.site.site_title = "TLT Resume Builder"
+admin.site.index_title = "From TLT with Love"
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("resume-form/", include("resume_form.urls")),
