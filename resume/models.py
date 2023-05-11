@@ -52,7 +52,11 @@ class Resume(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     template = models.ForeignKey(ResumeTemplate, on_delete=models.SET_NULL, null=True, blank=True)
     image = models.ImageField(upload_to=image_upload_to, blank=True, null=True)
-    thumbnail = models.ImageField(upload_to=thumbnail_upload_to, blank=True, null=True)
+    thumbnail = models.ImageField(
+        upload_to=thumbnail_upload_to,
+        default="default_images/resume_thumbnails/new_resume_thumbnail.png",
+        blank=True, null=True
+    )
     completeness = models.PositiveSmallIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
