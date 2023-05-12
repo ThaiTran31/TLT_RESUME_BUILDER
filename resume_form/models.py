@@ -1,6 +1,5 @@
 from email.policy import default
 from django.db import models
-from phonenumber_field.modelfields import PhoneNumberField
 
 from resume.models import Resume
 
@@ -19,7 +18,7 @@ class PersonalDetails(models.Model):
     email = models.EmailField(null=True, blank=True)
     place_of_birth = models.TextField(null=True, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
-    phone = PhoneNumberField(null=True, blank=True)
+    phone = models.CharField(max_length=12, null=True, blank=True)
     photo = models.ImageField(null=True, blank=True)
 
 
