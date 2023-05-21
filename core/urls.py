@@ -28,5 +28,7 @@ urlpatterns = [
     path("resume/", include("resume.urls")),
     path("accounts/", include("accounts.urls")),
     path("resume-template/", include("resume_template.urls")),
-    path("jobs/", include("jobs.urls"))
+    path("jobs/", include("jobs.urls")),
+    path("professional_summary/", include("professional_summary.urls")),
+    path("parse-resume/", include("parse_resume.urls"))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
