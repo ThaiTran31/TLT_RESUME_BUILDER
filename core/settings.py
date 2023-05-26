@@ -102,16 +102,6 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'railway',
-#         'USER': 'postgres',
-#         'PASSWORD': 'rq0LE826Tt3A6TGRKqQg',
-#         'HOST': 'containers-us-west-79.railway.app',
-#         'PORT': '7050',
-#     }
-# }
 if DEBUG:
     DATABASES = {
         'default': {
@@ -202,21 +192,31 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100
 }
+
+# ELASTICSEARCH_DSL = {
+#     'default': {
+#         'hosts': 'localhost:9200',
+#         'use_ssl': True,
+#         'http_auth': ('elastic', 'cE7hKQ1AE3Y5szwx-LiR'),
+#         'ca_certs': '/Users/thaitran/Coding/Elastic_Stack/elasticsearch-8.7.0/config/certs/http_ca.crt',
+#         'connection_class': RequestsHttpConnection
+#     },
+# }
 
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': 'localhost:9200',
-        'use_ssl': True,
-        'http_auth': ('elastic', 'cE7hKQ1AE3Y5szwx-LiR'),
-        'ca_certs': '/Users/thaitran/Coding/Elastic_Stack/elasticsearch-8.7.0/config/certs/http_ca.crt',
-        'connection_class': RequestsHttpConnection
-    },
+        'hosts': os.environ.get('ELASTIC_HOST'),
+        'http_auth': (os.environ.get('ELASTIC_USER'), os.environ.get('ELASTIC_PASSWORD')),
+        'timeout': 30
+    }
 }
 
-# CRONJOBS = [
-#     ('53 21 * * *', 'jobs.crons.job_postings_scraping_cron_job')
-# ]
+CRONJOBS = [
+    ('0 1 * * *', 'jobs.crons.job_postings_scraping_cron_job')
+]
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=30),
