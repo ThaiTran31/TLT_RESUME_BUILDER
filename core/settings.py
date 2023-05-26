@@ -61,7 +61,10 @@ INSTALLED_APPS = [
     'jobs',
     'corsheaders',
     'django_elasticsearch_dsl',
-    'django_crontab'
+    'django_crontab',
+    'professional_summary',
+    'parse_resume',
+    'ai_bridge',
 ]
 
 MIDDLEWARE = [
@@ -260,3 +263,5 @@ CORS_ALLOW_HEADERS = [
 # GOOGLE AUTHENTICATION
 GOOGLE_CLIENT_ID = None
 GOOGLE_CLIENT_SECRET = None
+
+AI_SERVICE_HOST = os.environ.get("AI_SERVICE_HOST")
