@@ -1,24 +1,14 @@
 from .scrapers import LinkedinScraper, VNWorksScraper
-from .models import JobPosting
+from .models import JobPosting, JobTitleSearchTerm, LocationSearchTerm
 from .documents import JobPostingDocument
-
-JOB_TITLES = [
-    'Software Developer',
-    # 'Sales Officer',
-    # 'Accountant',
-]
-
-LOCATIONS = [
-    'Ho Chi Minh city, Vietnam',
-    # 'Da Nang city, Vietnam',
-    # 'Ha Noi city, Vietnam'
-]
 
 
 def job_postings_scraping_cron_job():
     JobPosting.objects.all().delete()
-    for job_title in JOB_TITLES:
-        for location in LOCATIONS:
+    job_title_list = JobTitleSearchTerm.objects.values_list("term", flat=True).distinct()
+    location_list = LocationSearchTerm.objects.values_list("term", flat=True).distinct()
+    for job_title in job_title_list:
+        for location in location_list:
             vnw_jobs = VNWorksScraper(job_title, location)
             JobPostingDocument().update(vnw_jobs)
             lin_jobs = LinkedinScraper(job_title, location)
